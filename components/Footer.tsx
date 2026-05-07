@@ -1,16 +1,27 @@
+const EMAIL = "hajime19870909@icloud.com";
+
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-[#1B2845] py-10 text-center text-white/70">
+    <footer className="bg-[#1B2845] py-12 text-center text-white/70">
       <div className="mx-auto max-w-3xl px-6">
-        <p className="mb-2 text-sm font-semibold text-white">はじめ将棋教室</p>
-        <p className="text-xs">講師: 鈴木 肇</p>
-        <p className="mt-1 text-xs leading-relaxed">
+        <p className="mb-2 text-base font-bold text-white">はじめ将棋教室</p>
+        <p className="mb-1 text-xs">講師: 鈴木 肇</p>
+        <p className="mb-4 text-xs leading-relaxed">
           会場: Y.Y.World 囲碁・将棋
           <br className="sm:hidden" />
           (神奈川県横浜市南区吉野町3-10)
         </p>
-        <p className="mt-6 text-xs text-white/50">
+        <p className="text-xs">
+          お問い合わせ:{" "}
+          <a
+            href={`mailto:${EMAIL}`}
+            className="text-white/85 underline-offset-2 hover:text-white hover:underline"
+          >
+            {EMAIL}
+          </a>
+        </p>
+        <p className="mt-8 text-xs text-white/45">
           © {year} はじめ将棋教室
         </p>
       </div>

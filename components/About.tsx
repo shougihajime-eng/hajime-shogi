@@ -5,23 +5,49 @@ export default function About() {
         <h2 className="mb-3 text-xs font-semibold tracking-[0.3em] text-[#C19A4A]">
           ABOUT
         </h2>
-        <h3 className="mb-8 text-3xl font-bold text-[#1B2845] sm:text-4xl">
-          教室について
+        <h3 className="mb-10 text-3xl font-bold text-[#1B2845] sm:text-4xl">
+          こんな教室です
         </h3>
-        <p className="mb-6 text-base leading-relaxed text-[#1B2845]/80 sm:text-lg">
-          はじめ将棋教室は、横浜市・吉野町駅徒歩2分の
+
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              emoji: "♟",
+              title: "初めてでも大丈夫",
+              body: "駒の動かし方からゆっくり丁寧に。「全くの初心者です」という方こそ、ぜひ来てください。",
+            },
+            {
+              title: "楽しみながら強く",
+              emoji: "✦",
+              body: "「礼に始まり礼に終わる」を大切に。でも堅苦しくなく、笑い声も飛び交うアットホームな雰囲気です。",
+            },
+            {
+              emoji: "♛",
+              title: "子どもも大人も",
+              body: "1部は子ども、2部は大人。お子さんが将棋を始めたい家庭にも、もう一度指したい大人の方にも。",
+            },
+          ].map((card) => (
+            <div
+              key={card.title}
+              className="rounded-2xl border border-[#C19A4A]/25 bg-white p-6 text-center shadow-sm"
+            >
+              <p className="mb-2 text-3xl text-[#C19A4A]" aria-hidden>
+                {card.emoji}
+              </p>
+              <h4 className="mb-2 text-base font-bold text-[#1B2845]">
+                {card.title}
+              </h4>
+              <p className="text-sm leading-relaxed text-[#1B2845]/75">
+                {card.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-10 text-base leading-relaxed text-[#1B2845]/80 sm:text-lg">
+          まずは1局、指してみてください。
           <br className="hidden sm:block" />
-          「Y.Y.World 囲碁・将棋」で毎週木曜日に開催している将棋教室です。
-        </p>
-        <p className="text-base leading-relaxed text-[#1B2845]/80 sm:text-lg">
-          礼儀作法を大切にしながら、一人ひとりの棋力に合わせて
-          <br className="hidden sm:block" />
-          丁寧に指導します。
-          <strong className="font-semibold">
-            これから将棋を始めたい方も、
-            <br className="hidden sm:block" />
-            昔指していた方も、有段者の方も、どなたでもどうぞ。
-          </strong>
+          きっと「将棋って、こんなに楽しいんだ!」と感じてもらえるはずです。
         </p>
       </div>
     </section>

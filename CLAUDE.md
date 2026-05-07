@@ -80,32 +80,34 @@ npm run lint
 2. `git add` → `git commit` → `git push origin main`
 3. Vercel が自動でビルド → 本番に反映(数十秒〜2分)
 
-## 写真の差し替え方(鈴木先生本人の顔写真を入れる時)
+## 画像ファイル(public/)
 
-1. 写真ファイル(.jpg または .png)を `public/instructor.jpg` という名前で保存
-2. `components/Instructor.tsx` のプレースホルダー部分を以下に書き換え:
-   ```tsx
-   import Image from "next/image";
-   // ...
-   <div className="relative mx-auto size-48 overflow-hidden rounded-full shadow-xl shadow-[#C19A4A]/30 sm:size-56 md:size-64">
-     <Image
-       src="/instructor.jpg"
-       alt="鈴木 肇 先生"
-       fill
-       className="object-cover"
-       sizes="(max-width: 768px) 224px, 256px"
-       priority
-     />
-   </div>
-   ```
-3. `git add . && git commit -m "feat: 講師写真を差し替え" && git push`
+| ファイル | 出典 | 用途 |
+|---|---|---|
+| `public/instructor.jpg` | YouTube「はじめ先生の将棋研究所」のチャンネルアバター | 講師紹介の丸枠肖像 |
+| `public/youtube-banner.jpg` | YouTube「棋士中村太地将棋はじめch」のチャンネルバナー | 講師紹介下のコラボ紹介 |
+| `public/solo-banner.jpg` | YouTube「はじめ先生の将棋研究所」のチャンネルバナー(将棋盤) | ヒーロー背景 |
 
-## 後で確認する項目(プレースホルダーで進めている)
+差し替えるときはファイル名そのままで上書きすれば即反映される。新しい写真をもらったら以下のように上書き:
+```powershell
+# 写真ファイルを public/ に置いてから
+git add public/instructor.jpg
+git commit -m "feat: 講師写真を差し替え"
+git push
+```
 
-- 席料が 3,000 円に含まれるか別払いか → サイト下部に「※会場使用料は別途必要な場合があります」と注記
+## 連絡先(サイト掲載済み)
+
+- LINE グループ: https://line.me/ti/g/wM-e6uHMHv
+- メール(LINE が使えない方向け): hajime19870909@icloud.com
+- 会場電話: 045-251-4551
+
+## 後で確認する項目
+
+- 席料が 3,000 円に含まれるか別払いか → サイトには「※会場使用料は別途必要な場合があります」と注記
 - 入会金の有無 → 現在は記載なし(なし前提)
-- 鈴木先生本人による文言チェック
-- 教室の様子の写真(あれば Instructor の下や Hero に追加可能)
+- 鈴木先生本人による文言・写真の最終チェック
+- 教室の様子の写真(あれば Instructor の下や About に追加可能)
 
 ## 立ち上げ計画書
 

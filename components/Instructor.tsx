@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Instructor() {
   return (
     <section id="instructor" className="bg-[#FAF6EE] py-20">
@@ -11,11 +13,15 @@ export default function Instructor() {
           </h3>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-[auto_1fr] md:items-start">
-          <div className="mx-auto flex size-48 items-center justify-center rounded-full bg-gradient-to-br from-[#E8D9B5] to-[#C19A4A] shadow-xl shadow-[#C19A4A]/30 sm:size-56 md:size-60">
-            <span className="text-7xl font-black text-white drop-shadow sm:text-8xl">
-              肇
-            </span>
+        <div className="mb-12 grid gap-10 md:grid-cols-[auto_1fr] md:items-start">
+          <div className="relative mx-auto size-48 overflow-hidden rounded-full bg-white ring-4 ring-[#C19A4A]/30 shadow-xl shadow-[#C19A4A]/30 sm:size-56 md:size-60">
+            <Image
+              src="/instructor.jpg"
+              alt="鈴木 肇 先生"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 224px, 240px"
+            />
           </div>
 
           <div>
@@ -27,7 +33,7 @@ export default function Instructor() {
             </h4>
 
             <div className="mb-5">
-              <p className="mb-2 text-xs font-semibold tracking-[0.2em] text-[#9A7A38]">
+              <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
                 主な経歴
               </p>
               <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
@@ -40,7 +46,7 @@ export default function Instructor() {
             </div>
 
             <div className="mb-5">
-              <p className="mb-2 text-xs font-semibold tracking-[0.2em] text-[#9A7A38]">
+              <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
                 指導実績
               </p>
               <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
@@ -49,17 +55,44 @@ export default function Instructor() {
               </ul>
             </div>
 
-            <p className="text-sm leading-relaxed text-[#1B2845]/70">
-              「礼に始まり礼に終わる」を大切にしながら、まずは将棋を心から楽しんでもらう
-              ことを一番に。お子さんも大人の方も、初心者の方も、それぞれの棋力に合わせて
-              ゆっくり丁寧にお教えします。
+            <p className="rounded-2xl bg-[#F5EBD9]/60 p-5 text-sm leading-relaxed text-[#1B2845]/80">
+              強くなることはもちろん大事。でも、それ以上に
+              <strong className="font-bold text-[#1B2845]">
+                「将棋って楽しい!」
+              </strong>
+              を一番大切にしています。
               <br />
-              <br />
-              YouTube では自身のチャンネル「はじめ先生の将棋研究所」と、
-              中村太地 八段(元 王座)とのコラボ「棋士中村太地将棋はじめch」でも
-              発信中です。
+              実績はあるけれど、教室はとってもアットホーム。気構えず、ふらっと遊びに来る感覚で大丈夫です。
             </p>
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-[#1B2845]/10 bg-white p-3 shadow-md">
+          <div className="overflow-hidden rounded-xl">
+            <Image
+              src="/youtube-banner.jpg"
+              alt="YouTube『棋士中村太地将棋はじめch』 — 中村太地 八段とのコラボチャンネル"
+              width={2120}
+              height={596}
+              className="aspect-[2120/596] w-full object-cover"
+              sizes="(max-width: 768px) 100vw, 1024px"
+            />
+          </div>
+          <p className="px-2 pt-3 pb-1 text-center text-xs text-[#1B2845]/70 sm:text-sm">
+            YouTube{" "}
+            <a
+              href="https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[#1B2845] underline-offset-2 hover:underline"
+            >
+              「棋士中村太地将棋はじめch」
+            </a>
+            <span className="text-[#1B2845]/55">
+              {" "}
+              — 中村太地 八段(元 王座)とコラボ発信中
+            </span>
+          </p>
         </div>
       </div>
     </section>
