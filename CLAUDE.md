@@ -4,9 +4,9 @@
 
 ## 進捗(いまここ)
 
-- ✅ 直近で済んだこと: Next.js 雛形作成、トップページ実装、Vercel 公開
+- ✅ 直近で済んだこと: 管理画面(/admin)を実装。次回開催・お知らせ・料金・講師紹介の文言を Supabase 経由で編集可能に
 - 🟡 進行中: なし
-- 🔜 次の一歩: 鈴木先生本人による文言・写真の最終チェック → 必要なら修正
+- 🔜 次の一歩: はじめさんが管理画面にログインして編集を試す
 
 ## 本番URL・リポジトリ
 
@@ -21,7 +21,41 @@
 - フォント: Noto Sans JP (Google Fonts)
 - アイコン: lucide-react + 自作 X ロゴ
 - デプロイ: Vercel (GitHub `main` ブランチ自動デプロイ)
-- データベース: なし(静的ランディングページ)
+- データベース: 共有 Supabase の `hajime_shogi` スキーマ → `site_settings` テーブル(key-value)
+- 認証: 合言葉 1 つ + HMAC 署名 Cookie (`jose` ライブラリ、30日)
+
+## 管理画面(/admin)
+
+- URL: https://hajime-shogi.vercel.app/admin/login
+- 合言葉: ローカル `.env.local` の `ADMIN_PASSWORD` と Vercel 環境変数の両方に保存(GitHub には絶対上げない)
+- 編集できるもの: 次回開催 / お知らせ / 月謝・料金 / 講師紹介
+- 編集後 30 秒以内にトップページに反映(revalidatePath で再生成)
+
+### 管理画面の構造
+
+| ファイル | 役割 |
+|---|---|
+| `proxy.ts` | `/admin/*` を合言葉認証で守る(Next.js 16 の middleware → proxy 規約) |
+| `lib/auth.ts` | jose で JWT 署名・検証 |
+| `lib/supabase.ts` | service_role での Supabase クライアント |
+| `lib/settings.ts` | site_settings テーブルの読み書き(型付き、デフォルト値あり) |
+| `app/admin/login/page.tsx` | 合言葉入力フォーム |
+| `app/admin/login/actions.ts` | login / logout の Server Action |
+| `app/admin/layout.tsx` | 管理画面のヘッダー(ログアウト・サイトを見る) |
+| `app/admin/page.tsx` | 4 セクションの編集フォーム |
+| `app/admin/actions.ts` | 各セクション保存の Server Action |
+| `components/NextSessionBanner.tsx` | トップ最上部の「次回開催」バナー |
+| `components/NewsBanner.tsx` | お知らせ表示(visible=true のときのみ) |
+
+### 環境変数(Vercel + .env.local)
+
+| 名前 | 用途 |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | 共有 Supabase の URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | 公開用 anon キー(現在は SSR 経由で読むため未使用だが将来用) |
+| `SUPABASE_SERVICE_ROLE_KEY` | 管理画面の書き込み・公開ページの読み込みに使用(サーバ専用) |
+| `ADMIN_PASSWORD` | 管理画面の合言葉 |
+| `ADMIN_SECRET` | Cookie 署名用のランダム文字列 |
 
 ## 主要ファイル
 
@@ -39,6 +73,8 @@
 | `components/SocialLinks.tsx` | SNS リンク |
 | `components/Footer.tsx` | フッター |
 | `components/StickyLineCTA.tsx` | スマホ画面下部の常時 LINE CTA |
+| `components/NextSessionBanner.tsx` | 次回開催バナー(管理画面で操作) |
+| `components/NewsBanner.tsx` | お知らせバナー(管理画面で操作) |
 
 ## 教室基本情報
 

@@ -1,4 +1,18 @@
-export default function Schedule() {
+import { getSettings } from "@/lib/settings";
+
+function formatPrice(value: string): string {
+  const n = Number(value);
+  if (Number.isFinite(n) && n > 0) return n.toLocaleString("ja-JP");
+  return value;
+}
+
+export default async function Schedule() {
+  const s = await getSettings();
+  const kids = formatPrice(s["price.kids"]);
+  const adults = formatPrice(s["price.adults"]);
+  const both = formatPrice(s["price.both"]);
+  const trial = s["price.trial"];
+
   return (
     <section id="schedule" className="bg-[#F5EBD9]/50 py-20">
       <div className="mx-auto max-w-3xl px-6">
@@ -28,7 +42,8 @@ export default function Schedule() {
               <p className="text-sm text-[#1B2845]/70">17:00 - 19:00</p>
             </div>
             <p className="mt-3 text-2xl font-bold text-[#1B2845] sm:mt-0">
-              3,000<span className="text-base font-medium">円</span>
+              {kids}
+              <span className="text-base font-medium">円</span>
             </p>
           </div>
 
@@ -43,7 +58,8 @@ export default function Schedule() {
               <p className="text-sm text-[#1B2845]/70">19:00 - 21:00</p>
             </div>
             <p className="mt-3 text-2xl font-bold text-[#1B2845] sm:mt-0">
-              3,000<span className="text-base font-medium">円</span>
+              {adults}
+              <span className="text-base font-medium">円</span>
             </p>
           </div>
 
@@ -61,7 +77,8 @@ export default function Schedule() {
               <p className="text-sm text-[#1B2845]/70">17:00 - 21:00</p>
             </div>
             <p className="mt-3 text-2xl font-bold text-[#1B2845] sm:mt-0">
-              6,000<span className="text-base font-medium">円</span>
+              {both}
+              <span className="text-base font-medium">円</span>
             </p>
           </div>
 
@@ -78,8 +95,7 @@ export default function Schedule() {
               </p>
             </div>
             <p className="mt-3 text-xl font-bold text-[#1B2845] sm:mt-0">
-              席料 + 1,000
-              <span className="text-base font-medium">円</span>
+              {trial}
             </p>
           </div>
         </div>

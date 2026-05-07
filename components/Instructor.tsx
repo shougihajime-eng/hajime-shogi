@@ -1,6 +1,19 @@
 import Image from "next/image";
+import { getSettings } from "@/lib/settings";
 
-export default function Instructor() {
+function lines(value: string): string[] {
+  return value
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
+}
+
+export default async function Instructor() {
+  const s = await getSettings();
+  const career = lines(s["instructor.career"]);
+  const teaching = lines(s["instructor.teaching"]);
+  const message = s["instructor.message"];
+
   return (
     <section id="instructor" className="bg-[#FAF6EE] py-20">
       <div className="mx-auto max-w-4xl px-6">
@@ -32,38 +45,37 @@ export default function Instructor() {
               鈴木 肇 先生
             </h4>
 
-            <div className="mb-5">
-              <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
-                主な経歴
-              </p>
-              <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
-                <li>・元 奨励会三段</li>
-                <li>・第32期 全国アマチュア王将</li>
-                <li>・第72回 全日本アマチュア将棋名人</li>
-                <li>・加古川青流戦 アマチュア選抜大会 複数回優勝(プロ棋戦本選出場 計4回)</li>
-                <li>・横浜市出身</li>
-              </ul>
-            </div>
+            {career.length > 0 && (
+              <div className="mb-5">
+                <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
+                  主な経歴
+                </p>
+                <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
+                  {career.map((line, i) => (
+                    <li key={i}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <div className="mb-5">
-              <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
-                指導実績
-              </p>
-              <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
-                <li>・全国大会で優勝した子どもを多数育成</li>
-                <li>・現在 奨励会で活躍する教え子も輩出</li>
-              </ul>
-            </div>
+            {teaching.length > 0 && (
+              <div className="mb-5">
+                <p className="mb-2 text-xs font-bold tracking-[0.2em] text-[#9A7A38]">
+                  指導実績
+                </p>
+                <ul className="space-y-1.5 text-base leading-relaxed text-[#1B2845]/85">
+                  {teaching.map((line, i) => (
+                    <li key={i}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-            <p className="rounded-2xl bg-[#F5EBD9]/60 p-5 text-sm leading-relaxed text-[#1B2845]/80">
-              強くなることはもちろん大事。でも、それ以上に
-              <strong className="font-bold text-[#1B2845]">
-                「将棋って楽しい!」
-              </strong>
-              を一番大切にしています。
-              <br />
-              実績はあるけれど、教室はとってもアットホーム。気構えず、ふらっと遊びに来る感覚で大丈夫です。
-            </p>
+            {message.trim() && (
+              <p className="whitespace-pre-wrap rounded-2xl bg-[#F5EBD9]/60 p-5 text-sm leading-relaxed text-[#1B2845]/80">
+                {message}
+              </p>
+            )}
           </div>
         </div>
 
