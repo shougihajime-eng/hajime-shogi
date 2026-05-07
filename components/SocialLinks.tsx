@@ -39,20 +39,27 @@ function XLogo({ className }: { className?: string }) {
 
 const LINKS = [
   {
-    name: "YouTube",
-    handle: "はじめ先生の将棋連勝チャンネル",
+    platform: "YouTube",
+    label: "はじめ先生の将棋研究所",
     href: "https://www.youtube.com/channel/UC29EGo2JmszXaG6rfuCiOlA",
     Icon: YoutubeLogo,
   },
   {
-    name: "X",
-    handle: "@hajjme99",
+    platform: "YouTube",
+    label: "棋士中村太地将棋はじめch",
+    sub: "中村太地 八段とコラボ",
+    href: "https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg",
+    Icon: YoutubeLogo,
+  },
+  {
+    platform: "X",
+    label: "@hajjme99",
     href: "https://x.com/hajjme99",
     Icon: XLogo,
   },
   {
-    name: "Instagram",
-    handle: "@hajimesensei",
+    platform: "Instagram",
+    label: "@hajimesensei",
     href: "https://www.instagram.com/hajimesensei/",
     Icon: InstagramLogo,
   },
@@ -61,25 +68,40 @@ const LINKS = [
 export default function SocialLinks() {
   return (
     <section id="sns" className="bg-[#FAF6EE] py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <h2 className="mb-3 text-xs font-semibold tracking-[0.3em] text-[#C19A4A]">
-          FOLLOW
-        </h2>
-        <h3 className="mb-10 text-3xl font-bold text-[#1B2845] sm:text-4xl">
-          SNS
-        </h3>
-        <div className="flex flex-wrap justify-center gap-3">
-          {LINKS.map(({ name, handle, href, Icon }) => (
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="text-center">
+          <h2 className="mb-3 text-xs font-semibold tracking-[0.3em] text-[#C19A4A]">
+            FOLLOW
+          </h2>
+          <h3 className="mb-10 text-3xl font-bold text-[#1B2845] sm:text-4xl">
+            SNS・YouTube
+          </h3>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          {LINKS.map(({ platform, label, sub, href, Icon }) => (
             <a
-              key={name}
+              key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-full border border-[#1B2845]/15 bg-white px-5 py-3 shadow-sm transition hover:border-[#C19A4A] hover:shadow-md"
+              className="group flex items-center gap-4 rounded-2xl border border-[#1B2845]/10 bg-white p-4 shadow-sm transition hover:border-[#C19A4A] hover:shadow-md"
             >
-              <Icon className="size-5 text-[#1B2845] group-hover:text-[#C19A4A]" />
-              <span className="text-sm font-medium text-[#1B2845]">
-                {handle}
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#FAF6EE] text-[#1B2845] transition group-hover:bg-[#C19A4A]/10 group-hover:text-[#C19A4A]">
+                <Icon className="size-6" />
+              </span>
+              <span className="min-w-0 flex-1 text-left">
+                <span className="block text-xs font-semibold tracking-wider text-[#9A7A38]">
+                  {platform}
+                </span>
+                <span className="block truncate text-sm font-bold text-[#1B2845]">
+                  {label}
+                </span>
+                {sub && (
+                  <span className="block truncate text-xs text-[#1B2845]/60">
+                    {sub}
+                  </span>
+                )}
               </span>
             </a>
           ))}

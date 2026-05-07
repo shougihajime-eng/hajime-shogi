@@ -45,7 +45,7 @@
 | 項目 | 内容 |
 |---|---|
 | 教室名 | はじめ将棋教室 |
-| 講師 | 鈴木 肇 (元奨励会三段、第32期全国アマ王将、第72回全日本アマ名人) |
+| 講師 | 鈴木 肇 (元奨励会三段、第32期全国アマ王将、第72回全日本アマ名人、加古川青流戦アマ選抜大会 複数回優勝・本選出場4回) |
 | 会場 | Y.Y.World 囲碁・将棋 |
 | 住所 | 〒232-0014 神奈川県横浜市南区吉野町3-10 シャンテ2階 |
 | 会場電話 | 045-251-4551 |
@@ -55,7 +55,8 @@
 | 通し参加 | 17:00-21:00 / 6,000円 |
 | 体験参加 | 席料 + 1,000円 |
 | LINE 招待 URL | https://line.me/ti/g/wM-e6uHMHv |
-| YouTube | https://www.youtube.com/channel/UC29EGo2JmszXaG6rfuCiOlA |
+| YouTube(本人) | はじめ先生の将棋研究所 https://www.youtube.com/channel/UC29EGo2JmszXaG6rfuCiOlA |
+| YouTube(コラボ) | 棋士中村太地将棋はじめch https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg |
 | X | https://x.com/hajjme99 |
 | Instagram | https://www.instagram.com/hajimesensei/ |
 

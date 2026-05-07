@@ -66,6 +66,7 @@ const jsonLd = {
     "https://x.com/hajjme99",
     "https://www.instagram.com/hajimesensei/",
     "https://www.youtube.com/channel/UC29EGo2JmszXaG6rfuCiOlA",
+    "https://www.youtube.com/channel/UCC0Q1NBgGJRzFFPe1IPYtwg",
   ],
 };
 
