@@ -10,8 +10,9 @@
 
 ## 本番URL・リポジトリ
 
-- 公開サイト: (Vercel デプロイ後に追記)
+- 公開サイト: **https://hajime-shogi.vercel.app**
 - GitHub repo: https://github.com/shougihajime-eng/hajime-shogi
+- Vercel ダッシュボード: https://vercel.com/shougihajime-3368s-projects/hajime-shogi
 - 既存サイト(参考のみ・触らない): https://blog.goo.ne.jp/hajimekyoshitsu
 
 ## 技術構成
