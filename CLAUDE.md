@@ -4,9 +4,9 @@
 
 ## 進捗(いまここ)
 
-- ✅ 直近で済んだこと: 管理画面(/admin)を実装。次回開催・お知らせ・料金・講師紹介の文言を Supabase 経由で編集可能に
+- ✅ 直近で済んだこと: SEO 対応(sitemap.xml / robots.txt / canonical / OG画像 / LocalBusiness 構造化データ / Search Console 検証用メタ)
 - 🟡 進行中: なし
-- 🔜 次の一歩: はじめさんが管理画面にログインして編集を試す
+- 🔜 次の一歩: Google Search Console に登録してサイトマップを送信(下記「SEO・検索エンジン対応」参照)
 
 ## 本番URL・リポジトリ
 
@@ -56,13 +56,17 @@
 | `SUPABASE_SERVICE_ROLE_KEY` | 管理画面の書き込み・公開ページの読み込みに使用(サーバ専用) |
 | `ADMIN_PASSWORD` | 管理画面の合言葉 |
 | `ADMIN_SECRET` | Cookie 署名用のランダム文字列 |
+| `GOOGLE_SITE_VERIFICATION` | (任意)Google Search Console の所有権確認用コード。設定すると `<meta name="google-site-verification">` が自動で出る |
+| `BING_SITE_VERIFICATION` | (任意)Bing Webmaster Tools の所有権確認用コード。設定すると `<meta name="msvalidate.01">` が自動で出る |
 
 ## 主要ファイル
 
 | ファイル | 役割 |
 |---|---|
-| `app/layout.tsx` | 共通レイアウト・SEO メタデータ・JSON-LD・StickyCTA配置 |
+| `app/layout.tsx` | 共通レイアウト・SEO メタデータ・JSON-LD(EducationalOrganization + LocalBusiness)・StickyCTA配置 |
 | `app/page.tsx` | トップページ(全セクションを並べる) |
+| `app/sitemap.ts` | `sitemap.xml` を自動生成(Next.js が `/sitemap.xml` で配信) |
+| `app/robots.ts` | `robots.txt` を自動生成(`/admin` を Disallow、sitemap を指示) |
 | `app/globals.css` | Tailwind import + テーマ変数 |
 | `components/Hero.tsx` | ヒーロー(教室名 + LINE CTA) |
 | `components/About.tsx` | 教室について |
@@ -137,6 +141,75 @@ git push
 - LINE グループ: https://line.me/ti/g/wM-e6uHMHv
 - メール(LINE が使えない方向け): hajime19870909@icloud.com
 - 会場電話: 045-251-4551
+
+## SEO・検索エンジン対応
+
+Google / Yahoo / Bing の検索結果に表示させるための仕組み。
+
+### 実装済みの内容
+
+| 項目 | ファイル | 内容 |
+|---|---|---|
+| サイトマップ | `app/sitemap.ts` | `https://hajime-shogi.vercel.app/sitemap.xml` で配信。トップページを登録 |
+| robots.txt | `app/robots.ts` | `https://hajime-shogi.vercel.app/robots.txt` で配信。`/admin` を Disallow、sitemap の場所を指示 |
+| canonical | `app/layout.tsx` の `alternates.canonical` | 正規 URL を `/` に指定(重複ページ判定を防ぐ) |
+| メタタイトル / description | `app/layout.tsx` の `metadata` | 検索結果に出る文言。`title.template` で各ページ末尾に「\| はじめ将棋教室」 |
+| OG 画像(SNSシェア用) | `app/layout.tsx` の `openGraph.images` | `solo-banner.jpg` を 1200×630 として登録 |
+| 構造化データ | `app/layout.tsx` の `jsonLd` | `EducationalOrganization` + `LocalBusiness`(住所・電話・営業時間・料金帯・地理座標) |
+| Search Console 検証 | 環境変数 `GOOGLE_SITE_VERIFICATION` / `BING_SITE_VERIFICATION` | 値を入れると `<head>` に自動でメタタグが出る |
+| 管理画面の noindex | `app/admin/layout.tsx` / `app/admin/login/page.tsx` の `metadata.robots` | `/admin` 配下は検索結果に出ない |
+
+### Google Search Console への登録手順(はじめさん用)
+
+検索に載るためには **Google Search Console** にサイトを登録するのが最重要。次の順で進める。
+
+1. [Google Search Console](https://search.google.com/search-console) にアクセス(Google アカウントでログイン)
+2. 「プロパティを追加」→ **URL プレフィックス** を選択
+3. URL に `https://hajime-shogi.vercel.app` を入力 → 「続行」
+4. 所有権の確認方法で **HTML タグ** を選ぶ
+5. 表示された `<meta name="google-site-verification" content="xxxxxxxxxx" />` の **`xxxxxxxxxx` の部分だけコピー**
+6. [Vercel ダッシュボード](https://vercel.com/shougihajime-3368s-projects/hajime-shogi) → Settings → Environment Variables で以下を追加:
+   - Name: `GOOGLE_SITE_VERIFICATION`
+   - Value: コピーしたコード(`xxxxxxxxxx`)
+   - Environment: Production にチェック
+7. Vercel ダッシュボードの Deployments タブ → 最新のデプロイの「…」→ Redeploy を押す(数十秒で再デプロイ)
+8. Search Console に戻って「確認」ボタンを押す → 緑のチェックが出れば OK
+9. 左メニュー「サイトマップ」→ 「新しいサイトマップの追加」に `sitemap.xml` と入力して送信
+10. 数日〜2週間で Google が巡回開始 → 検索結果に出るようになる
+
+### Bing Webmaster Tools への登録(Yahoo!検索も Bing 由来なので推奨)
+
+Yahoo! Japan の検索結果は Google エンジン由来だが、Bing にも登録しておくと Edge ブラウザ等の検索にも出やすい。
+
+1. [Bing Webmaster Tools](https://www.bing.com/webmasters/) にアクセス
+2. 「Google Search Console からインポート」を選ぶと既に登録した情報を流用できる(楽)
+3. または手動登録の場合: `https://hajime-shogi.vercel.app` を追加 → HTML メタタグの値をコピー
+4. Vercel の環境変数に `BING_SITE_VERIFICATION` として追加 → Redeploy
+5. Bing 側で確認 → サイトマップ `sitemap.xml` を送信
+
+### Yahoo! Japan 検索について
+
+- Yahoo! Japan の検索結果は Google の検索エンジンを使っている
+- → **Google Search Console に登録すれば Yahoo! にも自動で反映される**
+- 別途 Yahoo! 専用の登録作業は不要
+
+### 動作確認(公開後にやること)
+
+| 確認内容 | 方法 |
+|---|---|
+| sitemap.xml が出ているか | ブラウザで `https://hajime-shogi.vercel.app/sitemap.xml` を開く → XML が表示されれば OK |
+| robots.txt が出ているか | ブラウザで `https://hajime-shogi.vercel.app/robots.txt` を開く → `Disallow: /admin` の行があれば OK |
+| 構造化データが正しいか | [Google リッチリザルトテスト](https://search.google.com/test/rich-results) に URL を貼って実行 → エラー 0 が望ましい |
+| OG 画像が出るか | [OGP 確認ツール](https://www.opengraph.xyz/) に URL を貼ると LINE / Twitter で見た目を確認できる |
+| インデックス状況 | Google で `site:hajime-shogi.vercel.app` と検索 → ヒットすればインデックス済み |
+| `/admin` がインデックスから除外されているか | Google で `site:hajime-shogi.vercel.app/admin` と検索 → ヒットしなければ OK |
+
+### 検索順位を上げるためにこれからできること(優先順)
+
+1. **教室の様子の写真を追加** → 画像検索からの流入が増える
+2. **「教室の様子」「実績」を別ページとして作成** → 検索キーワードを増やせる
+3. **独自ドメイン取得**(例: `hajime-shogi.com`)→ Vercel ダッシュボードで簡単に紐づけ可能。`.vercel.app` より信頼度が上がる
+4. **外部リンク獲得** → Y.Y.World 公式や中村太地八段のチャンネル概要欄等からリンクをもらうと評価が上がる
 
 ## 後で確認する項目
 
