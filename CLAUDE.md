@@ -4,9 +4,9 @@
 
 ## 進捗(いまここ)
 
-- ✅ 直近で済んだこと: SEO 対応(sitemap.xml / robots.txt / canonical / OG画像 / LocalBusiness 構造化データ / Search Console 検証用メタ)
+- ✅ 直近で済んだこと: Google Search Console に登録完了 + sitemap.xml 送信済み(2026-05-12)。HTML ファイル方式で所有権確認(`public/googlef7989c64688018c5.html`)
 - 🟡 進行中: なし
-- 🔜 次の一歩: Google Search Console に登録してサイトマップを送信(下記「SEO・検索エンジン対応」参照)
+- 🔜 次の一歩: 数日〜2週間後に Search Console で「カバレッジ」を確認してインデックス登録状況をチェック。並行して「教室の様子の写真」追加や独自ドメイン取得を検討
 
 ## 本番URL・リポジトリ
 
