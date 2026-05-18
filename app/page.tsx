@@ -3,6 +3,7 @@ import About from "@/components/About";
 import Schedule from "@/components/Schedule";
 import Instructor from "@/components/Instructor";
 import Access from "@/components/Access";
+import Faq from "@/components/Faq";
 import Apply from "@/components/Apply";
 import SocialLinks from "@/components/SocialLinks";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <Schedule />
         <Instructor />
         <Access />
+        <Faq />
         <Apply />
         <SocialLinks />
       </main>
