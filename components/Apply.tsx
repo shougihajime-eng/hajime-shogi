@@ -75,7 +75,7 @@ export default function Apply() {
           </p>
           <a
             href={`mailto:${EMAIL}?subject=はじめ将棋教室について`}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-white/40 bg-white/0 px-6 text-base font-semibold text-white transition hover:bg-white hover:text-[#1B2845]"
+            className="inline-flex h-12 max-w-full items-center justify-center gap-2 break-all rounded-full border-2 border-white/40 bg-white/0 px-5 text-sm font-semibold text-white transition hover:bg-white hover:text-[#1B2845] sm:px-6 sm:text-base"
           >
             {EMAIL}
           </a>
