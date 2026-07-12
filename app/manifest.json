@@ -1,0 +1,13 @@
+{
+  "name": "はじめ将棋教室",
+  "short_name": "将棋教室",
+  "description": "はじめ将棋教室（吉野町）の公式サイト。次回開催・お知らせ・料金。",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FBEDDC",
+  "theme_color": "#FBEDDC",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
